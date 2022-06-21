@@ -16,7 +16,14 @@
 #include <sys/types.h>
 #include <sys/signal.h>
 
+// 64-bit library
+#ifdef __amd64__
 const char service_interp[] __attribute__((section(".interp"))) = "/lib64/ld-linux-x86-64.so.2";
+#endif
+// 32-bit library
+#ifdef __i386__
+const char service_interp[] __attribute__((section(".interp"))) = "/lib/ld-linux.so.2";
+#endif
 
 int unlink_cb(const char *fpath, const struct stat *sb, int typeflag, struct FTW *ftwbuf)
 {
